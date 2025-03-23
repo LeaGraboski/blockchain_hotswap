@@ -56,10 +56,8 @@ class TestBlockStreamingService(unittest.TestCase):
         # Mock block data
         mock_block = {
             'number': 123,
-            'hash': bytes.fromhex(
-                '1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'),
-            'parentHash': bytes.fromhex(
-                'abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'),
+            'hash': bytes.fromhex('1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef'),
+            'parentHash': bytes.fromhex('abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890'),
             'timestamp': 1647235166,
             'transactions': []
         }

@@ -25,7 +25,7 @@ class TestProviderSwitching(unittest.TestCase):
         }
 
         # Patch HotswapMechanism in the module where it's used
-        hotswap_path = 'src.block_streaming_service.HotswapMechanism'  # Adjust if needed
+        hotswap_path = 'src.block_streaming_service.HotswapMechanism'
         self.hotswap_patcher = patch(hotswap_path)
         self.mock_hotswap_class = self.hotswap_patcher.start()
         self.mock_hotswap_instance = MagicMock()
