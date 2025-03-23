@@ -91,8 +91,7 @@ class HotswapMechanism:
         available_providers = [name for name, provider in
                                self.providers.items()
                                if
-                               name != current_provider_name and self._is_provider_healthy(
-                                   name)]
+                               name != current_provider_name and self._is_provider_healthy(name)]
 
         if not available_providers:
             self.logger.warning("No healthy alternative providers available")
@@ -126,28 +125,22 @@ class HotswapMechanism:
             # Keep only the last N measurements
             max_measurements = self.config.get('max_measurements', 10)
             if len(self.response_times[provider_name]) > max_measurements:
-                self.response_times[provider_name] = self.response_times[
-                                                         provider_name][
-                                                     -max_measurements:]
+                self.response_times[provider_name] = self.response_times[provider_name][-max_measurements:]
 
             # Check if average response time is too high
             if len(self.response_times[provider_name]) >= 3:
                 avg_time = statistics.mean(self.response_times[provider_name])
                 max_avg_time = self.config.get('max_avg_response_time', 2.0)
                 if avg_time > max_avg_time:
-                    self.logger.warning(
-                        f"Provider {provider_name} has high average response time: {avg_time:.2f}s")
-                    self.switch_provider(
-                        f"High average response time: {avg_time:.2f}s")
+                    self.logger.warning(f"Provider {provider_name} has high average response time: {avg_time:.2f}s")
+                    self.switch_provider(f"High average response time: {avg_time:.2f}s")
 
         elif issue_type == 'error':
             self.error_counts[provider_name] += 1
             error_threshold = self.config.get('error_threshold', 3)
             if self.error_counts[provider_name] >= error_threshold:
-                self.logger.warning(
-                    f"Provider {provider_name} reached error threshold: {self.error_counts[provider_name]}")
-                self.switch_provider(
-                    f"Error threshold reached: {self.error_counts[provider_name]}")
+                self.logger.warning(f"Provider {provider_name} reached error threshold: {self.error_counts[provider_name]}")
+                self.switch_provider(f"Error threshold reached: {self.error_counts[provider_name]}")
 
     def _is_provider_healthy(self, provider_name: str) -> bool:
         """
@@ -168,6 +161,5 @@ class HotswapMechanism:
             provider.get_latest_block_number()
             return True
         except Exception as e:
-            self.logger.warning(
-                f"Provider {provider_name} health check failed: {str(e)}")
+            self.logger.warning(f"Provider {provider_name} health check failed: {str(e)}")
             return False

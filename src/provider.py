@@ -21,8 +21,7 @@ class Provider:
 
         self.web3 = Web3(Web3.HTTPProvider(self.url))
         if not self.web3.is_connected():
-            raise ConnectionError(
-                f"Failed to connect to {self.name} at {self.url}")
+            raise ConnectionError(f"Failed to connect to {self.name} at {self.url}")
 
         self.logger.info(f"Connected to {self.name} at {self.url}")
 
@@ -40,8 +39,7 @@ class Provider:
                 f"Got latest block number from {self.name}: {result} (took {execution_time:.2f}s)")
             return result
         except Exception as e:
-            self.logger.error(
-                f"Error getting latest block number from {self.name}: {str(e)}")
+            self.logger.error(f"Error getting latest block number from {self.name}: {str(e)}")
             raise
 
     def get_block(self, block_number: int) -> Dict[str, Any]:
@@ -55,15 +53,11 @@ class Provider:
             Dict: Block data
         """
         try:
-            result, execution_time = self._measure_request_time(
-                self.web3.eth.get_block, block_number, full_transactions=False
-            )
-            self.logger.debug(
-                f"Got block {block_number} from {self.name} (took {execution_time:.2f}s)")
+            result, execution_time = self._measure_request_time(self.web3.eth.get_block, block_number, full_transactions=False)
+            self.logger.debug(f"Got block {block_number} from {self.name} (took {execution_time:.2f}s)")
             return result
         except Exception as e:
-            self.logger.error(
-                f"Error getting block {block_number} from {self.name}: {str(e)}")
+            self.logger.error(f"Error getting block {block_number} from {self.name}: {str(e)}")
             raise
 
     @classmethod

@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
 """
 Main entry point for the Blockchain Node Provider Hotswap service.
 """
 import logging
-import time
 from src.block_streaming_service import BlockStreamingService
 from src.utils.logger import setup_logger
 from src.utils.config import load_config

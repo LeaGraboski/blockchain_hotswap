@@ -84,15 +84,12 @@ class BlockStreamingService:
                 if processing_time > self.config.get('max_block_processing_time', 5):
                     self.logger.warning(f"Block {block_num} processing took {processing_time:.2f}s")
                     # Consider switching provider if consistently slow
-                    self.hotswap.report_performance_issue("slow_processing",
-                                                          processing_time)
+                    self.hotswap.report_performance_issue("slow_processing", processing_time)
                 previous_hash = block_data.get('hash')
 
             except Exception as e:
-                self.logger.error(
-                    f"Error processing block {block_num}: {str(e)}")
-                self.hotswap.switch_provider(
-                    f"Error processing block {block_num}: {str(e)}")
+                self.logger.error(f"Error processing block {block_num}: {str(e)}")
+                self.hotswap.switch_provider(f"Error processing block {block_num}: {str(e)}")
                 return
 
     def _validate_block(self, block_data: Dict[str, Any]) -> bool:

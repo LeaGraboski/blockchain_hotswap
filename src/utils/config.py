@@ -21,13 +21,13 @@ def load_config() -> Dict[str, Any]:
     """
     logger = logging.getLogger(__name__)
 
-    # Default configuration
+    # Default configuration time in seconds
     default_config = {
-        'expected_block_time': 12,  # seconds
-        'max_block_processing_time': 5,  # seconds
-        'max_avg_response_time': 2.0,  # seconds
+        'expected_block_time': 12,
+        'max_block_processing_time': 5,
+        'max_avg_response_time': 2.0,
         'error_threshold': 3,
-        'min_switch_interval': 30,  # seconds
+        'min_switch_interval': 30,
         'default_provider': ProviderName.ALCHEMY,
         'providers': {
             ProviderName.ALCHEMY: {
@@ -84,14 +84,12 @@ def validate_config(config: Dict[str, Any]) -> None:
 
     default_provider = config.get('default_provider')
     if default_provider not in providers:
-        raise ValueError(
-            f"Default provider '{default_provider}' not found in providers configuration")
+        raise ValueError(f"Default provider '{default_provider}' not found in providers configuration")
 
     # Ensure at least one provider has a URL
     for provider_name, provider_config in providers.items():
         if not provider_config.get('url'):
-            raise ValueError(
-                f"Provider '{provider_name}' is missing URL configuration")
+            raise ValueError(f"Provider '{provider_name}' is missing URL configuration")
 
 
 def deep_merge(dest: Dict[str, Any], src: Dict[str, Any]) -> None:
@@ -103,8 +101,7 @@ def deep_merge(dest: Dict[str, Any], src: Dict[str, Any]) -> None:
         src: Source dictionary
     """
     for key, value in src.items():
-        if key in dest and isinstance(dest[key], dict) and isinstance(value,
-                                                                      dict):
+        if key in dest and isinstance(dest[key], dict) and isinstance(value, dict):
             deep_merge(dest[key], value)
         else:
             dest[key] = value

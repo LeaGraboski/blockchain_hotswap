@@ -25,9 +25,7 @@ def setup_logger(log_level: Optional[str] = None) -> None:
     logging.basicConfig(
         level=numeric_level,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.StreamHandler(sys.stdout),
-        ]
+        handlers=[logging.StreamHandler(sys.stdout),]
     )
 
     # Set lower log level for some third-party libraries
