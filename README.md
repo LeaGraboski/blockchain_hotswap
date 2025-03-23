@@ -41,7 +41,7 @@ Build and run the application with Docker:
 
 ```bash
 # Build the Docker image
-docker build -t blockchain-hotswap .
+docker build -t blockchain_hotswap .
 
 # Run the container
 docker run -e ALCHEMY_URL="https://eth-mainnet.g.alchemy.com/v2/YOUR_API_KEY" blockchain-hotswap
@@ -114,4 +114,3 @@ python -m unittest tests.test_provider_switching
    - CPU and memory usage
    - Network I/O
    - Application restarts
-   
