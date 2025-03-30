@@ -123,7 +123,7 @@ class BlockStreamingService:
         """
         if current_block.get('parentHash') == previous_hash:
             return True
-        self.logger.warning(f"Hashing previous hash is not compatible with perant hash of current block")
+        self.logger.warning(f"Hashing previous hash is not compatible with parent hash of current block")
         return False
 
     def _log_block_data(self, block_num: int,
@@ -141,6 +141,7 @@ class BlockStreamingService:
             'hash': block_data.get('hash').hex(),
             'parent_hash': block_data.get('parentHash').hex(),
             'transaction_count': len(block_data.get('transactions', [])),
+            'size_bytes': block_data.get('size', 0)
         }
 
         # Log as JSON
