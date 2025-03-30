@@ -152,7 +152,7 @@ class HotswapMechanism:
         Returns:
             bool: True if provider is healthy, False otherwise
         """
-        provider = self.providers.get(provider_name)
+        provider: Provider = self.providers.get(provider_name)
         if not provider:
             return False
 
